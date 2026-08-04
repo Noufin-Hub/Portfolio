@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initActiveNavLink();
     initCertificateModal();
+    initPdfViewer();
+    initFloatingResumeBtn();
 });
 
 // ==========================================
@@ -611,8 +613,94 @@ function initCertificateModal() {
 }
 
 // ==========================================
-// UTILITY FUNCTIONS
+// RESUME FEATURE ENHANCEMENTS & TRACKING
 // ==========================================
+function initPdfViewer() {
+    const loadingOverlay = document.getElementById('pdfLoadingOverlay');
+    const errorContainer = document.getElementById('pdfErrorContainer');
+    const pdfObject = document.getElementById('pdfObjectViewer');
+    const downloadBtn = document.getElementById('resumeDownloadBtn');
+
+    if (!pdfObject || !loadingOverlay) return;
+
+    // Verify PDF file availability via fetch check
+    fetch('./NoufinResume.pdf', { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // Hide loading overlay once object loads
+                setTimeout(() => {
+                    loadingOverlay.classList.add('hidden');
+                }, 600);
+            } else {
+                showPdfError();
+            }
+        })
+        .catch(() => {
+            // Keep preview clean and enable fallback if direct object fails
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+            }, 600);
+        });
+
+    function showPdfError() {
+        if (loadingOverlay) loadingOverlay.classList.add('hidden');
+        if (errorContainer) errorContainer.classList.remove('hidden');
+    }
+}
+
+function initFloatingResumeBtn() {
+    const floatingBtn = document.getElementById('floatingResumeBtn');
+    
+    if (!floatingBtn) return;
+    
+    window.addEventListener('scroll', function() {
+        // Show floating resume button after scrolling past hero section
+        if (window.scrollY > 400) {
+            floatingBtn.classList.add('visible');
+        } else {
+            floatingBtn.classList.remove('visible');
+        }
+    });
+}
+
+function trackResumeDownload(event) {
+    const timestamp = new Date().toISOString();
+    console.log(`[Analytics] Resume PDF downloaded at ${timestamp}`);
+
+    // Create a subtle non-intrusive toast confirmation
+    showToastNotification('Downloading NoufinResume.pdf...');
+}
+
+function showToastNotification(message) {
+    let toast = document.getElementById('portfolioToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'portfolioToast';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '2rem';
+        toast.style.right = '2rem';
+        toast.style.backgroundColor = 'var(--primary)';
+        toast.style.color = 'white';
+        toast.style.padding = '0.75rem 1.5rem';
+        toast.style.borderRadius = 'var(--radius-lg)';
+        toast.style.boxShadow = 'var(--shadow-xl)';
+        toast.style.zIndex = '10000';
+        toast.style.fontSize = '0.9rem';
+        toast.style.fontWeight = '500';
+        toast.style.transition = 'all 300ms ease';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+    }, 3000);
+}
 
 // Debounce function for performance
 function debounce(func, wait) {

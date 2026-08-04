@@ -35,6 +35,12 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Sticky Floating Resume Button -->
+    <a href="./NoufinResume.pdf" download="NoufinResume.pdf" class="floating-resume-btn" id="floatingResumeBtn" onclick="trackResumeDownload(event)" aria-label="Quick Download Resume PDF" title="Download Resume PDF">
+        <i class="fas fa-file-download"></i>
+        <span class="floating-btn-text">Resume</span>
+    </a>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -654,23 +660,79 @@ International Journal of Engineering and Techniques(IJET)                    </p
     </section>
 
     <!-- Resume Section -->
-    <section id="resume" class="resume">
+    <section id="resume" class="resume" role="region" aria-label="Resume Section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Resume</h2>
-                <p class="section-subtitle">Download my resume</p>
+                <p class="section-subtitle">Preview online, open in new tab, or download my complete CV</p>
             </div>
             
-            <div class="resume-card">
-                <div class="resume-icon">
-                    <i class="fas fa-file-pdf"></i>
+            <div class="resume-card fade-in">
+                <!-- Header Metadata -->
+                <div class="resume-card-header">
+                    <div class="resume-header-main">
+                        <div class="resume-icon" aria-hidden="true">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="resume-header-text">
+                            <h3>Noufin P — Resume</h3>
+                            <p class="resume-subtitle-text">Data Scientist | Machine Learning Specialist | MCA Graduate</p>
+                        </div>
+                    </div>
+                    <div class="resume-meta-badges">
+                        <span class="meta-badge format-badge" title="File format and size"><i class="fas fa-file-alt"></i> PDF • ~120 KB</span>
+                        <span class="meta-badge date-badge" title="Last updated date"><i class="fas fa-clock"></i> Last Updated: August 2026</span>
+                    </div>
                 </div>
-                <h3>Noufin - Resume</h3>
-                <p>Download my resume to learn more about my experience, skills, and qualifications.</p>
-                <!-- PLACEHOLDER: Replace with actual resume file -->
-                <a href="assets/resume/Noufin_Resume.pdf" download class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download Resume
-                </a>
+
+                <!-- Recruiter Quick Contact Strip -->
+                <div class="recruiter-quick-contact">
+                    <span class="quick-contact-title"><i class="fas fa-briefcase"></i> Recruiter Quick Connect:</span>
+                    <div class="quick-contact-links">
+                        <a href="mailto:noufinp321@gmail.com" class="quick-link" aria-label="Send email to Noufin"><i class="fas fa-envelope"></i> Email</a>
+                        <a href="https://www.linkedin.com/in/noufinp" target="_blank" rel="noopener noreferrer" class="quick-link" aria-label="View LinkedIn Profile"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/Noufin-Hub" target="_blank" rel="noopener noreferrer" class="quick-link" aria-label="View GitHub Profile"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="tel:+919778749920" class="quick-link" aria-label="Call Noufin"><i class="fas fa-phone"></i> +91 9778749920</a>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons Bar -->
+                <div class="resume-actions-bar">
+                    <a href="./NoufinResume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary resume-view-btn" id="resumeViewBtn" aria-label="Open Resume PDF in new browser tab">
+                        <i class="fas fa-external-link-alt"></i> Open Resume
+                    </a>
+                    
+                    <a href="./NoufinResume.pdf" download="NoufinResume.pdf" class="btn btn-secondary resume-download-btn" id="resumeDownloadBtn" onclick="trackResumeDownload(event)" aria-label="Download Resume PDF directly">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                    
+                    <a href="#contact" class="btn btn-outline resume-hire-btn" aria-label="Scroll to contact section to hire me">
+                        <i class="fas fa-paper-plane"></i> Hire Me
+                    </a>
+                </div>
+
+                <!-- Embedded PDF Viewer Container -->
+                <div class="pdf-viewer-wrapper" id="pdfViewerWrapper">
+                    <div class="pdf-loading-overlay" id="pdfLoadingOverlay" aria-live="polite">
+                        <div class="loader-circle"></div>
+                        <span class="pdf-loading-text">Loading Resume Preview...</span>
+                    </div>
+                    
+                    <div class="pdf-error-container hidden" id="pdfErrorContainer" role="alert">
+                        <i class="fas fa-exclamation-triangle pdf-error-icon"></i>
+                        <h4>Unable to render PDF preview inline</h4>
+                        <p>Your browser or device might not support inline PDF embedding. You can view or download it directly using the buttons above.</p>
+                        <a href="./NoufinResume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                            <i class="fas fa-external-link-alt"></i> Open Resume PDF
+                        </a>
+                    </div>
+
+                    <object data="./NoufinResume.pdf#toolbar=1&navpanes=0&view=FitH" type="application/pdf" class="pdf-object-viewer" id="pdfObjectViewer" aria-label="Embedded Resume PDF Preview">
+                        <iframe src="./NoufinResume.pdf#toolbar=1&navpanes=0&view=FitH" title="Noufin Resume PDF Preview" class="pdf-iframe-viewer">
+                            <p>It appears your browser does not support embedded PDFs. You can <a href="./NoufinResume.pdf" target="_blank" rel="noopener noreferrer">click here to view or download the PDF.</a></p>
+                        </iframe>
+                    </object>
+                </div>
             </div>
         </div>
     </section>

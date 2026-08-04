@@ -1164,45 +1164,321 @@ section {
 }
 
 /* ==========================================
-   RESUME SECTION
+   RESUME SECTION (ENHANCED & RECRUITER FOCUS)
    ========================================== */
 .resume {
     background-color: var(--bg-primary);
+    padding: var(--spacing-3xl) 0;
 }
 
 .resume-card {
-    background-color: var(--bg-card);
-    padding: var(--spacing-3xl);
-    border-radius: var(--radius-xl);
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-    max-width: 600px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-xl);
+    max-width: 950px;
     margin: 0 auto;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
+}
+
+[data-theme="dark"] .resume-card {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: var(--border);
+}
+
+.resume-card:hover {
+    box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Resume Card Header */
+.resume-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .resume-card-header {
+    border-bottom-color: var(--border);
+}
+
+.resume-header-main {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
 }
 
 .resume-icon {
-    width: 80px;
-    height: 80px;
-    background-color: var(--primary);
-    border-radius: var(--radius-full);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: var(--radius-xl);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--spacing-xl);
-    font-size: 2rem;
+    font-size: 1.75rem;
+    color: white;
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+}
+
+.resume-header-text h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.resume-subtitle-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.resume-meta-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-xs);
+}
+
+.meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.meta-badge i {
+    color: var(--primary);
+}
+
+/* Recruiter Quick Contact Strip */
+.recruiter-quick-contact {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-hover);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-light);
+    margin-bottom: var(--spacing-xl);
+}
+
+[data-theme="dark"] .recruiter-quick-contact {
+    border-color: var(--border);
+}
+
+.quick-contact-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.quick-contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.quick-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.quick-link i {
+    color: var(--primary);
+}
+
+.quick-link:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.quick-link:hover i {
     color: white;
 }
 
-.resume-card h3 {
-    font-size: 1.5rem;
-    color: var(--text-primary);
+/* Resume Actions Bar */
+.resume-actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.resume-actions-bar .btn {
+    min-width: 170px;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+.resume-actions-bar .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.resume-actions-bar .btn:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* PDF Embedded Viewer Container */
+.pdf-viewer-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 650px;
+    height: 700px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+}
+
+.pdf-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    z-index: 5;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.pdf-loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.pdf-loading-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.pdf-error-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-2xl);
+    text-align: center;
+    z-index: 6;
+}
+
+.pdf-error-container.hidden {
+    display: none;
+}
+
+.pdf-error-icon {
+    font-size: 3rem;
+    color: #F59E0B;
     margin-bottom: var(--spacing-md);
 }
 
-.resume-card p {
+.pdf-error-container h4 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.pdf-error-container p {
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-xl);
-    text-align: center;
+    max-width: 500px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.pdf-object-viewer,
+.pdf-iframe-viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Sticky Floating Resume Button */
+.floating-resume-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 990;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-xl);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--transition-base);
+}
+
+.floating-resume-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-resume-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent-dark));
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.4);
+    color: white;
+}
+
+.floating-resume-btn:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* ==========================================
